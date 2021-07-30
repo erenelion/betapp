@@ -2,4 +2,5 @@
     <string name="app_name">AppDB</string>
     <string name="UserName">User Name</string>
     <string name="UserBet">User Bet</string>
+    <string name="NickName">Nickname</string>
 </resources>
