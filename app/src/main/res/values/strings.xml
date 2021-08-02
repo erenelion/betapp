@@ -3,4 +3,10 @@
     <string name="UserName">User Name</string>
     <string name="UserBet">User Bet</string>
     <string name="NickName">Nickname</string>
+    <string name="Password">Password</string>
+    <string name="entryNickname">Nickname</string>
+    <string name="entryEmail">Email</string>
+    <string name="entryPassword">Passworld</string>
+    <string name="entryPass">Password</string>
+    <string name="ConfirmPassword">Confirm password</string>
 </resources>

@@ -1,7 +1,7 @@
 package com.example.appdb;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.widget.ListViewCompat;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         dataBaseHelper = new DataBaseHelper(MainActivity.this);
 
-        ShowUsersOnRecyclerView(dataBaseHelper);
+        //ShowUsersOnRecyclerView(dataBaseHelper);
 
         //assign listeners for buttons
 
@@ -59,9 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     userModel = new UserModel(-1, et_name.getText().toString(), Integer.parseInt(et_bet.getText().toString()), sw_public.isChecked());
                     Toast.makeText(MainActivity.this, userModel.toString(), Toast.LENGTH_SHORT).show();
-                }
-
-                catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(MainActivity.this, "Wrong input", Toast.LENGTH_SHORT).show();
                     userModel = new UserModel(-1, "error", 0, false);
 
@@ -71,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
                 boolean success = dataBaseHelper.addOne(userModel);
 
-                Toast.makeText(getApplicationContext(), "Success = "+ success, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Success = " + success, Toast.LENGTH_SHORT).show();
 
-                ShowUsersOnRecyclerView(dataBaseHelper);
+                //ShowUsersOnRecyclerView(dataBaseHelper);
 
             }
         });
@@ -84,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
 
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
 
-                ShowUsersOnRecyclerView(dataBaseHelper);
+                //ShowUsersOnRecyclerView(dataBaseHelper);
 
 
             }
 
         });
 
-        lv_betStatus.setonItemClickListener(new AdapterView.OnItemClickListener() {
+       /* lv_betStatus.setonItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -109,7 +107,9 @@ public class MainActivity extends AppCompatActivity {
         userArrayAdapter = new ArrayAdapter<UserModel>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper2.getAll());
         lv_betStatus.setAdapter(userArrayAdapter);
     }
+*/
 
 
+    }
 
 }
