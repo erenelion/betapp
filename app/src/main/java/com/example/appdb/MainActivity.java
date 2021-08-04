@@ -2,114 +2,78 @@ package com.example.appdb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.Toast;
 
-import java.lang.reflect.Array;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class MainActivity extends AppCompatActivity {
 
-    //references to controls on layout
-    Button btn_propose;
-    Button btn_viewBets;
-    EditText et_name, et_bet;
-    Switch sw_public;
-    RecyclerView lv_betStatus;
 
-    ArrayAdapter userArrayAdapter;
-    DataBaseHelper dataBaseHelper;
+    Button btn_login;
+    Button btn_register;
+    EditText et_nickname, et_password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //assign values
+        btn_login = findViewById(R.id.btn_login);
+        btn_register = findViewById(R.id.btn_register);
+        et_nickname = findViewById(R.id.et_nickname);
+        et_password = findViewById(R.id.et_password);
 
-        btn_propose = findViewById(R.id.btn_propose);
-        btn_viewBets = findViewById(R.id.btn_viewBets);
-        et_name = findViewById(R.id.et_name);
-        et_bet = findViewById(R.id.et_bet);
-        sw_public = findViewById(R.id.sw_public);
-        lv_betStatus = findViewById(R.id.lv_betStatus);
-
-        dataBaseHelper = new DataBaseHelper(MainActivity.this);
-
-        //ShowUsersOnRecyclerView(dataBaseHelper);
-
-        //assign listeners for buttons
-
-        btn_propose.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                UserModel userModel;
+                Connection conexionMySQL = null;
 
                 try {
-                    userModel = new UserModel(-1, et_name.getText().toString(), Integer.parseInt(et_bet.getText().toString()), sw_public.isChecked());
-                    Toast.makeText(MainActivity.this, userModel.toString(), Toast.LENGTH_SHORT).show();
-                } catch (Exception e) {
-                    Toast.makeText(MainActivity.this, "Wrong input", Toast.LENGTH_SHORT).show();
-                    userModel = new UserModel(-1, "error", 0, false);
+                    Class.forName("com.mysql.jdbc.Driver").newInstance ();
+
+
+                    conexionMySQL = DriverManager.getConnection("jdbc:mysql://10.0.2.2/betapp", "root", "apuesta");
+
+                    Toast.makeText(MainActivity.this, "Connected to db", Toast.LENGTH_SHORT).show();
 
                 }
+                catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                catch (InstantiationException e) {
+                    e.printStackTrace();
+                }
+                catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
 
-                DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
-
-                boolean success = dataBaseHelper.addOne(userModel);
-
-                Toast.makeText(getApplicationContext(), "Success = " + success, Toast.LENGTH_SHORT).show();
-
-                //ShowUsersOnRecyclerView(dataBaseHelper);
 
             }
+
         });
 
-        btn_viewBets.setOnClickListener(new View.OnClickListener() {
+        btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                DataBaseHelper dataBaseHelper = new DataBaseHelper(MainActivity.this);
-
-                //ShowUsersOnRecyclerView(dataBaseHelper);
-
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
 
             }
 
         });
 
-       /* lv_betStatus.setonItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                UserModel clickedBet = (UserModel) parent.getItemAtPosition(position);
-                dataBaseHelper.deleteOne(clickedBet);
-                ShowUsersOnRecyclerView(dataBaseHelper) ;
-                Toast.makeText(MainActivity.this, "Deleted" + clickedBet.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
 
     }
-
-    private void ShowUsersOnRecyclerView(DataBaseHelper dataBaseHelper2) {
-        userArrayAdapter = new ArrayAdapter<UserModel>(MainActivity.this, android.R.layout.simple_list_item_1, dataBaseHelper2.getAll());
-        lv_betStatus.setAdapter(userArrayAdapter);
-    }
-*/
-
-
-    }
-
 }

@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     Button btn_entryRegister;
     EditText et_entryNickname;
@@ -19,7 +19,7 @@ public class Register extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.activity_register);
 
         btn_entryRegister = findViewById(R.id.btn_entryRegister);
         et_entryNickname = findViewById(R.id.et_entryNickname);
@@ -27,7 +27,8 @@ public class Register extends AppCompatActivity {
         et_entryPassword = findViewById(R.id.et_entryPassword);
         et_confirmPassword = findViewById(R.id.et_confirmPassword);
 
-        btn_entryRegister.setOnClickListener(new View.OnClickListener() {
+
+        /*btn_entryRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -36,6 +37,8 @@ public class Register extends AppCompatActivity {
             }
 
         });
+
+         */
 
 
     }
