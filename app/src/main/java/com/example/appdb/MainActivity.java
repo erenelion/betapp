@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -34,13 +35,20 @@ public class MainActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Connection conexionMySQL = null;
+
+                Connection connection = null;
 
                 try {
                     Class.forName("com.mysql.jdbc.Driver").newInstance ();
 
 
-                    conexionMySQL = DriverManager.getConnection("jdbc:mysql://10.0.2.2/betapp", "root", "apuesta");
+                    connection = DriverManager.getConnection("jdbc:mysql://10.0.2.2/betapp", "root", "apuesta");
+
+                    CallableStatement cStmt = connection.prepareCall("{call insert_user_procedure_andList(?,?)}");
+                    cStmt.setString(1, String.valueOf(et_nickname));
+                    cStmt.setString(2, String.valueOf(et_password));
+
+                    cStmt.execute();
 
                     Toast.makeText(MainActivity.this, "Connected to db", Toast.LENGTH_SHORT).show();
 
@@ -53,10 +61,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 catch (ClassNotFoundException e) {
                     e.printStackTrace();
-                } catch (SQLException throwables) {
+                } catch (
+                        SQLException throwables) {
                     throwables.printStackTrace();
                 }
-
 
             }
 
