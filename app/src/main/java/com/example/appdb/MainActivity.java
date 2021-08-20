@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     cStmt.setString(2, String.valueOf(et_password));
 
                     cStmt.execute();
-
+    
                     Toast.makeText(MainActivity.this, "Connected to db", Toast.LENGTH_SHORT).show();
 
                 }

@@ -40,16 +40,17 @@ public class RegisterActivity extends AppCompatActivity {
                 String registerInput = "";
                 Connection connection = null;
 
+                String user = String.valueOf(et_entryNickname);
+                String password = String.valueOf(et_entryPassword);
+                String email = String.valueOf(et_entryEmail);
+                String urlRegister = "http://10.0.2.2:8080/apiz-0.0.1-SNAPSHOT/ExecuteRegister/"+user+"/"+password+"/"+email;
+
                 try {
 
-                    connection = DriverManager.getConnection("jdbc:mysql://192.168.1.139:3306/betapp", "root", "apuesta");
+                    connection = DriverManager.getConnection("http://10.0.2.2:8080/apiz-0.0.1-SNAPSHOT/ExecuteRegister/", "root", "root");
 
 
-                    CallableStatement cStmt = connection.prepareCall("{call insert_user_procedure_andList(?,?)}");
-                    cStmt.setString(1, String.valueOf(et_entryNickname));
-                    cStmt.setString(2, String.valueOf(et_entryPassword));
-                    cStmt.setString(3, String.valueOf(et_entryEmail));
-
+                    CallableStatement cStmt = connection.prepareCall("{call register(?,?,?)}");
 
                     cStmt.execute();
 
