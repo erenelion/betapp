@@ -50,9 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
                     connection = DriverManager.getConnection("http://10.0.2.2:8080/apiz-0.0.1-SNAPSHOT/ExecuteRegister/", "root", "root");
 
 
-                    CallableStatement cStmt = connection.prepareCall("{call register(?,?,?)}");
 
-                    cStmt.execute();
 
                 } catch (SQLException e) {
                     e.printStackTrace();

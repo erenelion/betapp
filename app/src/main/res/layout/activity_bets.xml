@@ -57,7 +57,6 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
         android:text="Propose"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@id/btn_viewBets"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sw_public" />
