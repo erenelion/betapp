@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
+
 
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.btn_register);
