@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String user = String.valueOf(et_entryNickname);
                 String password = String.valueOf(et_entryPassword);
                 String email = String.valueOf(et_entryEmail);
-                String urlRegister = "http://10.0.2.2:8080/apiz-0.0.1-SNAPSHOT/ExecuteRegister/"+user+"/"+password+"/"+email;
+                String urlRegister = "http://127.0.0.1:8080/apiz-0.0.1-SNAPSHOT/ExecuteRegister/"+user+"/"+password+"/"+email;
 
                 JsonArrayRequest jRequest = new JsonArrayRequest(Request.Method.GET,urlRegister,null, new Response.Listener<JSONArray>() {
                     @Override
@@ -72,6 +72,8 @@ public class RegisterActivity extends AppCompatActivity {
 
                     }
                 });
+
+                MySingleton.getInstance(RegisterActivity.this).addToRequestQueue(jRequest);
 
                 //StringRequest stringRequest = new StringRequest(Request.Method.GET, urlRegister,
   //                      new Response.Listener<String>() {
@@ -91,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
         });
+
 
 
     }
