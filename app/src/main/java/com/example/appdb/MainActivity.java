@@ -41,35 +41,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Connection connection = null;
+                LoginService loginService = new LoginService(MainActivity.this);
 
-                try {
-                    Class.forName("com.mysql.jdbc.Driver").newInstance ();
+                String userData = loginService.getLoginData(et_nickname.getText().toString(), et_password.getText().toString());
 
+                Toast.makeText(MainActivity.this,"Succesful identification",Toast.LENGTH_SHORT).show();
 
-                    connection = DriverManager.getConnection("jdbc:mysql://10.0.2.2/betapp", "root", "apuesta");
-
-                    CallableStatement cStmt = connection.prepareCall("{call insert_user_procedure_andList(?,?)}");
-                    cStmt.setString(1, String.valueOf(et_nickname));
-                    cStmt.setString(2, String.valueOf(et_password));
-
-                    cStmt.execute();
-    
-                    Toast.makeText(MainActivity.this, "Connected to db", Toast.LENGTH_SHORT).show();
-
-                }
-                catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                }
-                catch (InstantiationException e) {
-                    e.printStackTrace();
-                }
-                catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (
-                        SQLException throwables) {
-                    throwables.printStackTrace();
-                }
 
             }
 

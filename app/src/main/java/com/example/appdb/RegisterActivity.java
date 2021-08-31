@@ -50,30 +50,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                RequestQueue requestRegister = Volley.newRequestQueue(RegisterActivity.this);
 
-                String user = String.valueOf(et_entryNickname);
-                String password = String.valueOf(et_entryPassword);
-                String email = String.valueOf(et_entryEmail);
-                String urlRegister = "http://127.0.0.1:8080/apiz-0.0.1-SNAPSHOT/ExecuteRegister/"+user+"/"+password+"/"+email;
+               // RequestQueue requestRegister = Volley.newRequestQueue(RegisterActivity.this);
 
-                JsonArrayRequest jRequest = new JsonArrayRequest(Request.Method.GET,urlRegister,null, new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
 
-                        Toast.makeText(RegisterActivity.this,response.toString(),Toast.LENGTH_SHORT).show();
-
-                    }
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-
-                        Toast.makeText(RegisterActivity.this,"Error in login",Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
-                MySingleton.getInstance(RegisterActivity.this).addToRequestQueue(jRequest);
 
                 //StringRequest stringRequest = new StringRequest(Request.Method.GET, urlRegister,
   //                      new Response.Listener<String>() {
